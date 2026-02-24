@@ -65,6 +65,11 @@
 - src/game/systems/ParticleSystem.ts: emit(x,y,count,color)で4x4矩形パーティクルをランダム方向に放射(速度1-5px/f)。update()で毎フレームlife-=0.02＆alpha減少、life≤0でremoveChild＆destroy。clear()で全パーティクル即座削除。destroy()でContainerごと破棄
 - tsc & vite build 成功確認済み
 
+### Task 11: GameScene統合 (完了)
+- src/game/scenes/GameScene.ts: Scene実装。enter()でPlayer、全ObjectPool(Bullet:100, EnemyBullet:300, Enemy:30, PowerUp:10)、Boss、CollisionSystem、StageManager、ParticleSystem、HUDを生成＆container追加。update(dt)で順にPlayer→StageManager→全Enemy→Boss→全Bullet/EnemyBullet→全PowerUp→CollisionSystem→Boss衝突判定→ParticleSystem→HUD更新を実行。残機0で120フレーム遅延後にonGameOver(score)コールバック、ボス撃破＆ステージクリア判定で同様にonStageClear(score)コールバック。ボス撃破時に白+赤パーティクル爆発＆敵弾全消去
+- src/game/Game.ts: GameScene import追加。startGame()でGameScene生成＆switchTo()。onGameOver/onStageClear → showTitle()（GameOverScene接続はTask 12で実装予定）
+- tsc & vite build 成功確認済み
+
 ## 次のタスク
 
-Task 11: GameScene統合
+Task 12: ゲームオーバー・最終結合・動作確認

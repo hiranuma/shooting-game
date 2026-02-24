@@ -291,7 +291,7 @@ React関連パッケージは削除可能（任意）。
   - `src/game/entities/Boss.ts` を作成: Entity 継承。HP=100, 64x64px。出現:y=-80→y=80移動。左右揺動 `x=centerX+sin(frame*0.02)*100`。Phase1(HP>50):60f毎に5way弾。Phase2(HP<=50):追加90f毎に16way弾＆揺動速度2倍。撃破時onDefeatコールバック
   - `src/game/systems/ParticleSystem.ts` を作成: `emit(container,x,y,count)` で4x4矩形パーティクルをランダム方向に放射。毎フレームalpha減少、消滅時removeChild
 
-- [ ] Task 11: GameScene統合
+- [x] Task 11: GameScene統合
   - `src/game/scenes/GameScene.ts` を作成: Scene実装。init()でPlayer, 全ObjectPool(Bullet:100, EnemyBullet:300, Enemy:30, PowerUp:10), CollisionSystem, StageManager, HUD, ParticleSystemを生成＆container追加。update(dt)で順に実行: Player→StageManager→全Enemy→全Bullet/EnemyBullet→CollisionSystem→HUD更新→ParticleSystem。残機0でonGameOver(score)、ボス撃破でonStageClear(score)
 
 - [ ] Task 12: ゲームオーバー・最終結合・動作確認

@@ -2,6 +2,7 @@ import type { Application } from 'pixi.js';
 import { SceneManager } from './SceneManager.ts';
 import { KeyboardManager } from './systems/KeyboardManager.ts';
 import { TitleScene } from './scenes/TitleScene.ts';
+import { GameScene } from './scenes/GameScene.ts';
 
 export class Game {
   readonly app: Application;
@@ -32,7 +33,11 @@ export class Game {
   }
 
   private startGame(): void {
-    // Will be wired to GameScene in Task 11
-    console.log('Start game — GameScene not yet implemented');
+    const scene = new GameScene(
+      this.keyboard,
+      (_score) => this.showTitle(), // GameOverScene will replace this in Task 12
+      (_score) => this.showTitle(), // GameOverScene will replace this in Task 12
+    );
+    this.scenes.switchTo(scene);
   }
 }
