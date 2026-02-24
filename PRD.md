@@ -276,7 +276,7 @@ React関連パッケージは削除可能（任意）。
   - `src/game/systems/BulletPatterns.ts` を作成: `fireAimed(pool,fromX,fromY,targetX,targetY,speed)` 自機狙い弾、`fireSpread(pool,fromX,fromY,targetX,targetY,speed,count,angleSpread)` 扇状弾、`fireRing(pool,fromX,fromY,speed,count)` 全方位弾
   - `src/game/entities/Enemy.ts` を作成: Entity 継承。enemyConfig で初期化。移動パターン（Drone:サイン波下降、Tank:直進→y=150停止120f→退場、Spinner:円形移動）。fireTimerでBulletPatterns呼び出し。`takeDamage(amount)` でHP管理
 
-- [ ] Task 7: 衝突判定・アイテム
+- [x] Task 7: 衝突判定・アイテム
   - `src/game/entities/PowerUp.ts` を作成: Entity 継承。毎フレーム `y+=2` 落下、画面外で非active化
   - `src/game/systems/CollisionSystem.ts` を作成: AABB判定 `checkAABB(a,b): boolean`。update()で4種判定: (1)自機弾vs敵→ダメージ＆弾消滅、撃破時30%でPowerUpドロップ＆スコア加算 (2)敵弾vs自機→無敵中スキップ、被弾処理 (3)敵本体vs自機→同上 (4)PowerUpvs自機→パワー+1
 
