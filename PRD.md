@@ -265,7 +265,7 @@ React関連パッケージは削除可能（任意）。
   - `src/game/scenes/TitleScene.ts` を作成: Container に "SHOOTING GAME" タイトル（PixiJS Text, 白, 太字, 36px）と "Press SPACE to Start"（灰色, 20px）を画面中央に配置。update() で SPACE キー検知時にコールバックで遷移通知
   - `src/main.ts` を更新: Game クラスをインスタンス化して `game.start()` を呼ぶ
 
-- [ ] Task 5: 自機・自機弾・オブジェクトプール
+- [x] Task 5: 自機・自機弾・オブジェクトプール
   - `src/game/systems/ObjectPool.ts` を作成: ジェネリック `ObjectPool<T extends Entity>`。`constructor(factory, initialSize)` で事前確保、`get(): T`（非activeを返すか新規作成）、`getActive(): T[]`、`releaseAll(): void`
   - `src/game/entities/Bullet.ts` を作成: Entity 継承。`vx`, `vy` プロパティ。update() で位置更新＆graphics位置同期、画面外で `active=false, graphics.visible=false`。`reset(x,y,vx,vy)` で再利用
   - `src/game/entities/Player.ts` を作成: Entity 継承。KeyboardManager で矢印キー8方向移動（通常5px/f, Shift時2px/f）。PLAY_AREA内にclamp。Zキーで4フレーム毎にBullet発射（ObjectPool使用）。パワーレベル0-2でショット数変化（0:単発, 1:2連, 2:3連）。残機3、被弾時120フレーム無敵（alpha点滅）
