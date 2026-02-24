@@ -280,7 +280,7 @@ React関連パッケージは削除可能（任意）。
   - `src/game/entities/PowerUp.ts` を作成: Entity 継承。毎フレーム `y+=2` 落下、画面外で非active化
   - `src/game/systems/CollisionSystem.ts` を作成: AABB判定 `checkAABB(a,b): boolean`。update()で4種判定: (1)自機弾vs敵→ダメージ＆弾消滅、撃破時30%でPowerUpドロップ＆スコア加算 (2)敵弾vs自機→無敵中スキップ、被弾処理 (3)敵本体vs自機→同上 (4)PowerUpvs自機→パワー+1
 
-- [ ] Task 8: HUD
+- [x] Task 8: HUD
   - `src/game/ui/HUD.ts` を作成: Container に3つのText配置。スコア（右側 "SCORE: 0"）、残機（左上 "LIFE: 3"）、パワー（左上下 "POW: 0"）。fontFamily='monospace', fontSize=14, fill=0xffffff。`updateScore()`, `updateLives()`, `updatePower()` メソッド
 
 - [ ] Task 9: ステージ管理
