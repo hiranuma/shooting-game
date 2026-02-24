@@ -20,6 +20,13 @@
 - src/game/utils/constants.ts: 敵HP/速度/スコア/攻撃間隔/ボス行動定数を追加
 - tsc & vite build 成功確認済み
 
+### Task 3: 入力・基盤システム (完了)
+- src/game/systems/KeyboardManager.ts: keydown/keyupイベント管理、isDown()/isPressed()メソッド、update()でフレーム単位のpressed状態クリア、preventDefault()でスクロール防止
+- src/game/entities/Entity.ts: 抽象基底クラス。Container保持、x/y座標アクセサ、AABB半サイズhitboxW/hitboxH、collidesWith()衝突判定、active状態管理
+- src/game/scenes/Scene.ts: Sceneインターフェース定義。container, enter(), update(dt), exit()
+- src/game/SceneManager.ts: switchTo()でシーン切替（exit→removeChild→addChild→enter）、update()で現シーン更新委譲
+- tsc & vite build 成功確認済み
+
 ## 次のタスク
 
-Task 3: 入力・基盤システム — KeyboardManager.ts, Entity.ts, Scene.ts, SceneManager.ts
+Task 4: ゲームコントローラ・タイトル画面 — Game.ts, TitleScene.ts, main.ts接続

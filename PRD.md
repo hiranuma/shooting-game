@@ -244,17 +244,58 @@ React関連パッケージは削除可能（任意）。
 - 難易度選択
 - コンティニュー機能
 
-## 6. 実装タスク
+## 6. 実装タスク（Ralph Loop用）
 
-- [x] Task 1: プロジェクトセットアップ — PixiJS導入、Vite/TS設定変更、エントリポイント作成
-- [x] Task 2: コアユーティリティ — constants.ts, math.ts, graphics.ts
-- [ ] Task 3: 入力・基盤システム — KeyboardManager.ts, Entity.ts, Scene.ts, SceneManager.ts
-- [ ] Task 4: ゲームコントローラ・タイトル画面 — Game.ts, TitleScene.ts, main.ts接続
-- [ ] Task 5: 自機・自機弾 — Player.ts, Bullet.ts, ObjectPool.ts
-- [ ] Task 6: 敵システム — enemyConfig.ts, Enemy.ts, EnemyBullet.ts, BulletPatterns.ts
-- [ ] Task 7: アイテム・衝突判定 — PowerUp.ts, CollisionSystem.ts
-- [ ] Task 8: HUD — HUD.ts（スコア・残機・パワー表示）
-- [ ] Task 9: ステージ管理 — stage1.ts, StageManager.ts
-- [ ] Task 10: ボス・パーティクル — Boss.ts, ParticleSystem.ts
-- [ ] Task 11: GameScene統合 — GameScene.ts（全システム結合）
-- [ ] Task 12: ゲームオーバー・最終結合 — GameOverScene.ts、ゲームループ完成
+各タスクは上から順に1つずつ実装すること。実装後は `[x]` に変更し、`progress.txt` に完了報告を追記する。全タスク完了後、`.loop_status` に `PROJECT_COMPLETED` を書き込む。
+
+- [x] Task 1: プロジェクトセットアップ
+  - PixiJS v8導入、React削除、Vite/TS設定変更、エントリポイント作成
+
+- [x] Task 2: コアユーティリティ作成
+  - constants.ts, math.ts, graphics.ts 作成済み
+
+- [x] Task 3: 入力・基盤システム
+  - `src/game/systems/KeyboardManager.ts` を作成: keydown/keyup イベントで `Map<string, boolean>` を管理、`isDown(code: string): boolean` メソッド、`preventDefault()` で矢印キー等のスクロール防止
+  - `src/game/entities/Entity.ts` を作成: 抽象クラス。プロパティ: `graphics: Graphics`, `x: number`, `y: number`, `width: number`, `height: number`, `active: boolean`。抽象メソッド: `update(dt: number)`, `reset(...args: any[]): void`
+  - `src/game/scenes/Scene.ts` を作成: インターフェース定義。`container: Container`, `init(): void`, `update(dt: number): void`, `destroy(): void`
+  - `src/game/SceneManager.ts` を作成: `changeScene(scene: Scene)` で現シーンの destroy & removeChild → 新シーンの addChild & init。`update(dt: number)` で現シーンの update を呼ぶ
+
+- [ ] Task 4: ゲームコントローラ・タイトル画面
+  - `src/game/Game.ts` を作成: Application, SceneManager, KeyboardManager を保持。`start()` で `app.ticker.add()` に update を登録、TitleScene を初期シーンとして設定
+  - `src/game/scenes/TitleScene.ts` を作成: Container に "SHOOTING GAME" タイトル（PixiJS Text, 白, 太字, 36px）と "Press SPACE to Start"（灰色, 20px）を画面中央に配置。update() で SPACE キー検知時にコールバックで遷移通知
+  - `src/main.ts` を更新: Game クラスをインスタンス化して `game.start()` を呼ぶ
+
+- [ ] Task 5: 自機・自機弾・オブジェクトプール
+  - `src/game/systems/ObjectPool.ts` を作成: ジェネリック `ObjectPool<T extends Entity>`。`constructor(factory, initialSize)` で事前確保、`get(): T`（非activeを返すか新規作成）、`getActive(): T[]`、`releaseAll(): void`
+  - `src/game/entities/Bullet.ts` を作成: Entity 継承。`vx`, `vy` プロパティ。update() で位置更新＆graphics位置同期、画面外で `active=false, graphics.visible=false`。`reset(x,y,vx,vy)` で再利用
+  - `src/game/entities/Player.ts` を作成: Entity 継承。KeyboardManager で矢印キー8方向移動（通常5px/f, Shift時2px/f）。PLAY_AREA内にclamp。Zキーで4フレーム毎にBullet発射（ObjectPool使用）。パワーレベル0-2でショット数変化（0:単発, 1:2連, 2:3連）。残機3、被弾時120フレーム無敵（alpha点滅）
+
+- [ ] Task 6: 敵システム
+  - `src/game/data/enemyConfig.ts` を作成: `type EnemyType = 'drone'|'tank'|'spinner'`。各タイプの `{ hp, speed, width, height, score, fireRate }` をRecord型で定義（Drone: hp=1,speed=3,score=100、Tank: hp=5,speed=1.5,score=300、Spinner: hp=3,speed=2,score=500）
+  - `src/game/entities/EnemyBullet.ts` を作成: Entity 継承。`vx`, `vy` で移動、画面外で非active化
+  - `src/game/systems/BulletPatterns.ts` を作成: `fireAimed(pool,fromX,fromY,targetX,targetY,speed)` 自機狙い弾、`fireSpread(pool,fromX,fromY,targetX,targetY,speed,count,angleSpread)` 扇状弾、`fireRing(pool,fromX,fromY,speed,count)` 全方位弾
+  - `src/game/entities/Enemy.ts` を作成: Entity 継承。enemyConfig で初期化。移動パターン（Drone:サイン波下降、Tank:直進→y=150停止120f→退場、Spinner:円形移動）。fireTimerでBulletPatterns呼び出し。`takeDamage(amount)` でHP管理
+
+- [ ] Task 7: 衝突判定・アイテム
+  - `src/game/entities/PowerUp.ts` を作成: Entity 継承。毎フレーム `y+=2` 落下、画面外で非active化
+  - `src/game/systems/CollisionSystem.ts` を作成: AABB判定 `checkAABB(a,b): boolean`。update()で4種判定: (1)自機弾vs敵→ダメージ＆弾消滅、撃破時30%でPowerUpドロップ＆スコア加算 (2)敵弾vs自機→無敵中スキップ、被弾処理 (3)敵本体vs自機→同上 (4)PowerUpvs自機→パワー+1
+
+- [ ] Task 8: HUD
+  - `src/game/ui/HUD.ts` を作成: Container に3つのText配置。スコア（右側 "SCORE: 0"）、残機（左上 "LIFE: 3"）、パワー（左上下 "POW: 0"）。fontFamily='monospace', fontSize=14, fill=0xffffff。`updateScore()`, `updateLives()`, `updatePower()` メソッド
+
+- [ ] Task 9: ステージ管理
+  - `src/game/data/stage1.ts` を作成: `WaveDefinition` 型（`{ frameStart, enemyType, count, spawnInterval, spawnX, spawnY, isBoss? }`）。セクション2.9のタイムラインに従い全ウェーブ定義（0:00=frame0, 0:15=900, 0:30=1800, 0:50=3000, 1:10=4200, 1:30=5400, 1:50=6600, 2:00=7200）。最終: `{frameStart:7200, isBoss:true}`
+  - `src/game/systems/StageManager.ts` を作成: frameカウンタで stage1 配列を走査、frameStart到達時にEnemy生成。ボスフラグ時はBoss生成。`isStageCleared(): boolean` 公開
+
+- [ ] Task 10: ボス・パーティクル
+  - `src/game/entities/Boss.ts` を作成: Entity 継承。HP=100, 64x64px。出現:y=-80→y=80移動。左右揺動 `x=centerX+sin(frame*0.02)*100`。Phase1(HP>50):60f毎に5way弾。Phase2(HP<=50):追加90f毎に16way弾＆揺動速度2倍。撃破時onDefeatコールバック
+  - `src/game/systems/ParticleSystem.ts` を作成: `emit(container,x,y,count)` で4x4矩形パーティクルをランダム方向に放射。毎フレームalpha減少、消滅時removeChild
+
+- [ ] Task 11: GameScene統合
+  - `src/game/scenes/GameScene.ts` を作成: Scene実装。init()でPlayer, 全ObjectPool(Bullet:100, EnemyBullet:300, Enemy:30, PowerUp:10), CollisionSystem, StageManager, HUD, ParticleSystemを生成＆container追加。update(dt)で順に実行: Player→StageManager→全Enemy→全Bullet/EnemyBullet→CollisionSystem→HUD更新→ParticleSystem。残機0でonGameOver(score)、ボス撃破でonStageClear(score)
+
+- [ ] Task 12: ゲームオーバー・最終結合・動作確認
+  - `src/game/scenes/GameOverScene.ts` を作成: score(number)とisClear(boolean)を受け取り、"STAGE CLEAR!" or "GAME OVER" + スコア表示 + "Press SPACE to Return"。SPACEでTitleScene遷移
+  - Game.ts を更新: Title→Game→GameOver→Title のフルループ接続
+  - `npm run build` でエラーゼロ確認
+  - 全体フロー動作確認: タイトル→ゲームプレイ→ゲームオーバー/クリア→タイトル
