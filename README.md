@@ -2,6 +2,10 @@
 
 A 2D vertical scrolling shooting game (STG) built with TypeScript and PixiJS, running in the browser.
 
+<p align="center">
+  <img src="public/video/gameplay.gif" alt="Gameplay Demo" width="360">
+</p>
+
 ## How to Play
 
 ### Controls
