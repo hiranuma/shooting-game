@@ -287,7 +287,7 @@ React関連パッケージは削除可能（任意）。
   - `src/game/data/stage1.ts` を作成: `WaveDefinition` 型（`{ frameStart, enemyType, count, spawnInterval, spawnX, spawnY, isBoss? }`）。セクション2.9のタイムラインに従い全ウェーブ定義（0:00=frame0, 0:15=900, 0:30=1800, 0:50=3000, 1:10=4200, 1:30=5400, 1:50=6600, 2:00=7200）。最終: `{frameStart:7200, isBoss:true}`
   - `src/game/systems/StageManager.ts` を作成: frameカウンタで stage1 配列を走査、frameStart到達時にEnemy生成。ボスフラグ時はBoss生成。`isStageCleared(): boolean` 公開
 
-- [ ] Task 10: ボス・パーティクル
+- [x] Task 10: ボス・パーティクル
   - `src/game/entities/Boss.ts` を作成: Entity 継承。HP=100, 64x64px。出現:y=-80→y=80移動。左右揺動 `x=centerX+sin(frame*0.02)*100`。Phase1(HP>50):60f毎に5way弾。Phase2(HP<=50):追加90f毎に16way弾＆揺動速度2倍。撃破時onDefeatコールバック
   - `src/game/systems/ParticleSystem.ts` を作成: `emit(container,x,y,count)` で4x4矩形パーティクルをランダム方向に放射。毎フレームalpha減少、消滅時removeChild
 

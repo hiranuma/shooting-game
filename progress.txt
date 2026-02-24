@@ -60,6 +60,11 @@
 - src/game/systems/StageManager.ts: frameカウンタでSTAGE_1_WAVES配列を走査。ActiveWave管理でspawnInterval毎にEnemy生成（spawnX〜spawnXEnd間で均等配置）。isBossフラグ時はonBossSpawnコールバック呼び出し。notifyBossDefeated()でボス撃破通知。isStageCleared()で全ウェーブ完了＆ボス撃破＆敵残存なしを判定
 - tsc & vite build 成功確認済み
 
+### Task 10: ボス・パーティクル (完了)
+- src/game/entities/Boss.ts: Entity継承。HP=100, hitbox半サイズ32x32(64x64px)。init()でbulletPool/getPlayerPos/onDefeatコールバック設定。entering状態でy=-80→y=80移動。左右揺動 x=centerX+sin(frame*swaySpeed)*100。Phase1(HP>50):60f毎にfireSpread 5way弾(±40°)。Phase2(HP≤50):追加90f毎にfireRing 16way弾＆揺動速度2倍(0.04)。takeDamage()でHP管理、撃破時onDefeatコールバック呼び出し＆非active化
+- src/game/systems/ParticleSystem.ts: emit(x,y,count,color)で4x4矩形パーティクルをランダム方向に放射(速度1-5px/f)。update()で毎フレームlife-=0.02＆alpha減少、life≤0でremoveChild＆destroy。clear()で全パーティクル即座削除。destroy()でContainerごと破棄
+- tsc & vite build 成功確認済み
+
 ## 次のタスク
 
-Task 10: ボス・パーティクル — Boss.ts, ParticleSystem.ts
+Task 11: GameScene統合
