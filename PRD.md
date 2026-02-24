@@ -283,7 +283,7 @@ React関連パッケージは削除可能（任意）。
 - [x] Task 8: HUD
   - `src/game/ui/HUD.ts` を作成: Container に3つのText配置。スコア（右側 "SCORE: 0"）、残機（左上 "LIFE: 3"）、パワー（左上下 "POW: 0"）。fontFamily='monospace', fontSize=14, fill=0xffffff。`updateScore()`, `updateLives()`, `updatePower()` メソッド
 
-- [ ] Task 9: ステージ管理
+- [x] Task 9: ステージ管理
   - `src/game/data/stage1.ts` を作成: `WaveDefinition` 型（`{ frameStart, enemyType, count, spawnInterval, spawnX, spawnY, isBoss? }`）。セクション2.9のタイムラインに従い全ウェーブ定義（0:00=frame0, 0:15=900, 0:30=1800, 0:50=3000, 1:10=4200, 1:30=5400, 1:50=6600, 2:00=7200）。最終: `{frameStart:7200, isBoss:true}`
   - `src/game/systems/StageManager.ts` を作成: frameカウンタで stage1 配列を走査、frameStart到達時にEnemy生成。ボスフラグ時はBoss生成。`isStageCleared(): boolean` 公開
 

@@ -55,6 +55,11 @@
 - src/game/ui/HUD.ts: Container に3つのText配置。スコア（右上 "SCORE: 0" anchor右寄せ）、残機（左上 "LIFE: 3"）、パワー（左上下 "POW: 0"）。fontFamily='monospace', fontSize=14, fill=0xffffff。updateScore()/updateLives()/updatePower()メソッドで各テキスト動的更新
 - tsc & vite build 成功確認済み
 
+### Task 9: ステージ管理 (完了)
+- src/game/data/stage1.ts: WaveDefinition型（frameStart/enemyType/count/spawnInterval/spawnX/spawnY/spawnXEnd?/isBoss?）。PRDセクション2.9タイムラインに従い全18ウェーブ定義。Drone3波(0-900f)→Tank+Drone(900-1800f)→Spinner左右(1800-3000f)→混成(3000-4200f)→Drone大群+Spinner(4200-5400f)→Tank編隊+Spinner(5400-6600f)→小休止(6600-7200f)→ボス(7200f)
+- src/game/systems/StageManager.ts: frameカウンタでSTAGE_1_WAVES配列を走査。ActiveWave管理でspawnInterval毎にEnemy生成（spawnX〜spawnXEnd間で均等配置）。isBossフラグ時はonBossSpawnコールバック呼び出し。notifyBossDefeated()でボス撃破通知。isStageCleared()で全ウェーブ完了＆ボス撃破＆敵残存なしを判定
+- tsc & vite build 成功確認済み
+
 ## 次のタスク
 
-Task 9: ステージ管理 — stage1.ts, StageManager.ts
+Task 10: ボス・パーティクル — Boss.ts, ParticleSystem.ts
