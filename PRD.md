@@ -270,7 +270,7 @@ React関連パッケージは削除可能（任意）。
   - `src/game/entities/Bullet.ts` を作成: Entity 継承。`vx`, `vy` プロパティ。update() で位置更新＆graphics位置同期、画面外で `active=false, graphics.visible=false`。`reset(x,y,vx,vy)` で再利用
   - `src/game/entities/Player.ts` を作成: Entity 継承。KeyboardManager で矢印キー8方向移動（通常5px/f, Shift時2px/f）。PLAY_AREA内にclamp。Zキーで4フレーム毎にBullet発射（ObjectPool使用）。パワーレベル0-2でショット数変化（0:単発, 1:2連, 2:3連）。残機3、被弾時120フレーム無敵（alpha点滅）
 
-- [ ] Task 6: 敵システム
+- [x] Task 6: 敵システム
   - `src/game/data/enemyConfig.ts` を作成: `type EnemyType = 'drone'|'tank'|'spinner'`。各タイプの `{ hp, speed, width, height, score, fireRate }` をRecord型で定義（Drone: hp=1,speed=3,score=100、Tank: hp=5,speed=1.5,score=300、Spinner: hp=3,speed=2,score=500）
   - `src/game/entities/EnemyBullet.ts` を作成: Entity 継承。`vx`, `vy` で移動、画面外で非active化
   - `src/game/systems/BulletPatterns.ts` を作成: `fireAimed(pool,fromX,fromY,targetX,targetY,speed)` 自機狙い弾、`fireSpread(pool,fromX,fromY,targetX,targetY,speed,count,angleSpread)` 扇状弾、`fireRing(pool,fromX,fromY,speed,count)` 全方位弾

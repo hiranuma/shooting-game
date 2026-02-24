@@ -39,6 +39,13 @@
 - src/game/entities/Player.ts: Entity継承。8方向移動（通常5px/f, Shift時2px/f）、PLAY_AREA内clamp、斜め移動正規化。Zキー長押し連射（4f間隔）、パワーレベル0-2（単発→2連±5°→3連±10°）。残機3、被弾時120f無敵（alpha点滅）、パワーリセット。hit()/powerUp()/reset()メソッド
 - tsc & vite build 成功確認済み
 
+### Task 6: 敵システム (完了)
+- src/game/data/enemyConfig.ts: EnemyType型('drone'|'tank'|'spinner')、EnemyConfigインターフェース、ENEMY_CONFIGS Record型で各タイプのhp/speed/width/height/score/fireRate定義
+- src/game/entities/EnemyBullet.ts: Entity継承。vx/vyで移動、画面外で自動非active化。reset(x,y,vx,vy)でプール再利用
+- src/game/systems/BulletPatterns.ts: fireAimed()自機狙い弾、fireSpread()扇状弾（count/angleSpread指定）、fireRing()全方位弾（count方向均等配置）
+- src/game/entities/Enemy.ts: Entity継承。init()でEnemyTypeに応じたグラフィックス・パラメータ設定。移動パターン — Drone:サイン波下降(振幅40px)、Tank:直進→y=150で120f停止→退場(3way弾は停止中のみ)、Spinner:円形移動(半径60px)+緩やかな下降+回転演出。takeDamage()でHP管理(被弾フラッシュ付き)
+- tsc & vite build 成功確認済み
+
 ## 次のタスク
 
-Task 6: 敵システム — enemyConfig.ts, EnemyBullet.ts, BulletPatterns.ts, Enemy.ts
+Task 7: 衝突判定・アイテム — PowerUp.ts, CollisionSystem.ts
