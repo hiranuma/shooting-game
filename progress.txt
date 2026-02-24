@@ -70,6 +70,11 @@
 - src/game/Game.ts: GameScene import追加。startGame()でGameScene生成＆switchTo()。onGameOver/onStageClear → showTitle()（GameOverScene接続はTask 12で実装予定）
 - tsc & vite build 成功確認済み
 
-## 次のタスク
+### Task 12: ゲームオーバー・最終結合・動作確認 (完了)
+- src/game/scenes/GameOverScene.ts: Scene実装。score(number)とisClear(boolean)をコンストラクタで受け取り、isClear時"STAGE CLEAR!"(緑36px太字)、false時"GAME OVER"(赤36px太字)を画面中央上部に表示。"SCORE: {score}"(白24px)を中央に表示。"Press SPACE to Return"(灰色20px)を中央下部に表示。update()でSPACEキーisPressed検知→onReturnコールバック呼び出し
+- src/game/Game.ts: GameOverScene import追加。startGame()のコールバックをshowGameOver(score,isClear)に接続。showGameOver()でGameOverScene生成→switchTo()。onReturn→showTitle()でフルループ完成: Title→Game→GameOver→Title
+- tsc & vite build 成功確認済み（エラーゼロ）
 
-Task 12: ゲームオーバー・最終結合・動作確認
+## 全タスク完了
+
+全12タスクの実装が完了。シーン遷移フルループ: TitleScene → [SPACE] → GameScene → [死亡] → GameOverScene("GAME OVER") → [SPACE] → TitleScene / GameScene → [ボス撃破] → GameOverScene("STAGE CLEAR!") → [SPACE] → TitleScene

@@ -294,7 +294,7 @@ React関連パッケージは削除可能（任意）。
 - [x] Task 11: GameScene統合
   - `src/game/scenes/GameScene.ts` を作成: Scene実装。init()でPlayer, 全ObjectPool(Bullet:100, EnemyBullet:300, Enemy:30, PowerUp:10), CollisionSystem, StageManager, HUD, ParticleSystemを生成＆container追加。update(dt)で順に実行: Player→StageManager→全Enemy→全Bullet/EnemyBullet→CollisionSystem→HUD更新→ParticleSystem。残機0でonGameOver(score)、ボス撃破でonStageClear(score)
 
-- [ ] Task 12: ゲームオーバー・最終結合・動作確認
+- [x] Task 12: ゲームオーバー・最終結合・動作確認
   - `src/game/scenes/GameOverScene.ts` を作成: score(number)とisClear(boolean)を受け取り、"STAGE CLEAR!" or "GAME OVER" + スコア表示 + "Press SPACE to Return"。SPACEでTitleScene遷移
   - Game.ts を更新: Title→Game→GameOver→Title のフルループ接続
   - `npm run build` でエラーゼロ確認

@@ -3,6 +3,7 @@ import { SceneManager } from './SceneManager.ts';
 import { KeyboardManager } from './systems/KeyboardManager.ts';
 import { TitleScene } from './scenes/TitleScene.ts';
 import { GameScene } from './scenes/GameScene.ts';
+import { GameOverScene } from './scenes/GameOverScene.ts';
 
 export class Game {
   readonly app: Application;
@@ -35,9 +36,16 @@ export class Game {
   private startGame(): void {
     const scene = new GameScene(
       this.keyboard,
-      (_score) => this.showTitle(), // GameOverScene will replace this in Task 12
-      (_score) => this.showTitle(), // GameOverScene will replace this in Task 12
+      (score) => this.showGameOver(score, false),
+      (score) => this.showGameOver(score, true),
     );
+    this.scenes.switchTo(scene);
+  }
+
+  private showGameOver(score: number, isClear: boolean): void {
+    const scene = new GameOverScene(this.keyboard, score, isClear, () => {
+      this.showTitle();
+    });
     this.scenes.switchTo(scene);
   }
 }
