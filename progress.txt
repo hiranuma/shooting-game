@@ -14,6 +14,12 @@
 - src/game/{scenes,entities,systems,data,ui,utils}/ ディレクトリ構造作成
 - tsc & vite build 成功確認済み
 
+### Task 2: コアユーティリティ (完了)
+- src/game/utils/math.ts: clamp, angleBetween, dist, distSq, degToRad, radToDeg, lerp, normalizeAngle
+- src/game/utils/graphics.ts: 全エンティティの図形描画ファクトリ関数（Player, Drone, Tank, Spinner, Boss, PlayerBullet, EnemyBullet, PowerUp）
+- src/game/utils/constants.ts: 敵HP/速度/スコア/攻撃間隔/ボス行動定数を追加
+- tsc & vite build 成功確認済み
+
 ## 次のタスク
 
-Task 2: コアユーティリティ — constants.ts, math.ts, graphics.ts
+Task 3: 入力・基盤システム — KeyboardManager.ts, Entity.ts, Scene.ts, SceneManager.ts

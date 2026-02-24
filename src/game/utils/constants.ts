@@ -38,6 +38,34 @@ export const POWERUP_DROP_RATE = 0.3;
 export const POWERUP_FALL_SPEED = 2;
 export const POWER_MAX_LEVEL = 2;
 
+// Enemy scores
+export const DRONE_SCORE = 100;
+export const TANK_SCORE = 300;
+export const SPINNER_SCORE = 500;
+
+// Enemy HP
+export const DRONE_HP = 1;
+export const TANK_HP = 5;
+export const SPINNER_HP = 3;
+
+// Enemy speeds
+export const DRONE_SPEED = 3;
+export const TANK_SPEED = 1.5;
+export const SPINNER_SPEED = 2;
+
+// Enemy attack intervals (frames)
+export const DRONE_FIRE_INTERVAL = 60;
+export const TANK_FIRE_INTERVAL = 90;
+export const SPINNER_FIRE_INTERVAL = 120;
+
+// Tank behavior
+export const TANK_STOP_Y = 150;
+export const TANK_STOP_DURATION = 120;
+
 // Boss
 export const BOSS_HP = 100;
 export const BOSS_SCORE = 5000;
+export const BOSS_TARGET_Y = 80;
+export const BOSS_PHASE2_HP = 50;
+export const BOSS_PHASE1_INTERVAL = 60;
+export const BOSS_PHASE2_RADIAL_INTERVAL = 90;

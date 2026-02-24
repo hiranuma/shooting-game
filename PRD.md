@@ -247,7 +247,7 @@ React関連パッケージは削除可能（任意）。
 ## 6. 実装タスク
 
 - [x] Task 1: プロジェクトセットアップ — PixiJS導入、Vite/TS設定変更、エントリポイント作成
-- [ ] Task 2: コアユーティリティ — constants.ts, math.ts, graphics.ts
+- [x] Task 2: コアユーティリティ — constants.ts, math.ts, graphics.ts
 - [ ] Task 3: 入力・基盤システム — KeyboardManager.ts, Entity.ts, Scene.ts, SceneManager.ts
 - [ ] Task 4: ゲームコントローラ・タイトル画面 — Game.ts, TitleScene.ts, main.ts接続
 - [ ] Task 5: 自機・自機弾 — Player.ts, Bullet.ts, ObjectPool.ts
