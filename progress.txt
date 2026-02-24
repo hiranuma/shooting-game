@@ -1,0 +1,19 @@
+# Shooting Game - 実装進捗
+
+## 完了タスク
+
+### Task 1: プロジェクトセットアップ (完了)
+- pixi.js@^8 をインストール
+- vite.config.ts: React plugin削除
+- tsconfig.app.json: JSX設定削除
+- index.html: エントリポイントを /src/main.ts に変更、ゲーム用CSS追加
+- React関連ファイル削除 (App.tsx, App.css, main.tsx, index.css, assets/)
+- src/main.ts: PixiJS Application初期化エントリポイント作成
+- src/game/Game.ts: スタブ作成
+- src/game/utils/constants.ts: ゲーム定数定義
+- src/game/{scenes,entities,systems,data,ui,utils}/ ディレクトリ構造作成
+- tsc & vite build 成功確認済み
+
+## 次のタスク
+
+Task 2: コアユーティリティ — constants.ts, math.ts, graphics.ts
