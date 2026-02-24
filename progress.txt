@@ -27,6 +27,12 @@
 - src/game/SceneManager.ts: switchTo()でシーン切替（exit→removeChild→addChild→enter）、update()で現シーン更新委譲
 - tsc & vite build 成功確認済み
 
+### Task 4: ゲームコントローラ・タイトル画面 (完了)
+- src/game/Game.ts: Application, SceneManager, KeyboardManager保持。start()でticker登録（update→keyboard.update）、TitleSceneを初期シーン設定。showTitle()でTitleScene生成・遷移
+- src/game/scenes/TitleScene.ts: "SHOOTING GAME"タイトル（白太字36px monospace）＋"Press SPACE to Start"（灰色20px）を画面中央配置。update()でSPACEキーisPressed検知→onStartコールバック呼び出し
+- src/main.ts: 変更不要（既存コードがGame生成→start()を呼ぶ構造で正しく動作）
+- tsc & vite build 成功確認済み
+
 ## 次のタスク
 
-Task 4: ゲームコントローラ・タイトル画面 — Game.ts, TitleScene.ts, main.ts接続
+Task 5: 自機・自機弾・オブジェクトプール — ObjectPool.ts, Bullet.ts, Player.ts

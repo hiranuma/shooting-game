@@ -260,7 +260,7 @@ React関連パッケージは削除可能（任意）。
   - `src/game/scenes/Scene.ts` を作成: インターフェース定義。`container: Container`, `init(): void`, `update(dt: number): void`, `destroy(): void`
   - `src/game/SceneManager.ts` を作成: `changeScene(scene: Scene)` で現シーンの destroy & removeChild → 新シーンの addChild & init。`update(dt: number)` で現シーンの update を呼ぶ
 
-- [ ] Task 4: ゲームコントローラ・タイトル画面
+- [x] Task 4: ゲームコントローラ・タイトル画面
   - `src/game/Game.ts` を作成: Application, SceneManager, KeyboardManager を保持。`start()` で `app.ticker.add()` に update を登録、TitleScene を初期シーンとして設定
   - `src/game/scenes/TitleScene.ts` を作成: Container に "SHOOTING GAME" タイトル（PixiJS Text, 白, 太字, 36px）と "Press SPACE to Start"（灰色, 20px）を画面中央に配置。update() で SPACE キー検知時にコールバックで遷移通知
   - `src/main.ts` を更新: Game クラスをインスタンス化して `game.start()` を呼ぶ
